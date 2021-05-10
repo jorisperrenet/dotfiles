@@ -1,0 +1,9 @@
+[submodule ".config/zsh/themes/pure"]
+	path = .config/zsh/themes/pure
+	url = https://github.com/sindresorhus/pure
+[submodule ".config/zsh/plugins/zsh-vim-mode"]
+	path = .config/zsh/plugins/zsh-vim-mode
+	url = https://github.com/softmoth/zsh-vim-mode
+[submodule ".config/zsh/plugins/zsh-syntax-highlighting"]
+	path = .config/zsh/plugins/zsh-syntax-highlighting
+	url = https://github.com/zsh-users/zsh-syntax-highlighting

@@ -1,0 +1,8 @@
+killall polybar
+while pgrep polybar >/dev/null; do sleep 1; done
+
+i3-msg reload
+i3-msg restart
+
+sleep .5; . ${XDG_CONFIG_HOME:-$HOME/.config}/polybar/launch.sh &
+

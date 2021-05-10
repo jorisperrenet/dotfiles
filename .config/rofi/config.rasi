@@ -1,0 +1,128 @@
+configuration {
+	width:                          50;
+	lines:                          10;
+	columns:                        3;
+	font:                           "Source Code Pro 10";
+	location:                       2;
+	yoffset:                        200;
+	xoffset:                        0;
+	show-icons:                     true;
+	case-sensitive:                 false;
+	cycle:                          true;
+	sidebar-mode:                   true;
+	hide-scrollbar:                 true;
+	fullscreen:                     false;
+	click-to-exit:                  true;
+	modi:                           "run,drun,window";
+	display-run:                    "";
+	display-drun:                   "";
+	display-window:                 "";
+}
+
+@import "colors.rasi"
+
+* {
+    background-color:               @background;
+    text-color:                     @foreground;
+}
+
+window {
+    transparency:                   "real";
+    border-radius:                  0px;
+    location:                       center;
+    width:                       	1000px;
+    x-offset:                       0px;
+    y-offset:                       0px;
+}
+
+mainbox {
+    background-color:               @background;
+    children:                       [ inputbar, mode-switcher, listview ];
+    spacing:                        0px;
+    margin:                         40px;
+}
+
+prompt {
+    enabled: 						true;
+    padding:                        10px;
+	background-color: 				@background;
+	text-color: 					@accent;
+    border:                  		2px 0px 2px 0px;
+    border-radius:                  0px;
+    border-color:                  	@accent;
+}
+
+textbox-prompt-colon {
+	expand: 						false;
+    str:                            " Programs ";
+	background-color: 				@accent;
+	text-color: 					@background;
+    padding:                        12px 10px 0px 10px;
+}
+
+inputbar {
+	children: 						[ textbox-prompt-colon, prompt, entry ];
+    spacing:                        0px;
+    background-color:               @background-light;
+    text-color:                     @foreground;
+    expand:                         false;
+    border:                  		0px;
+    border-radius:                  0px;
+    border-color:                  	@accent;
+    margin:                         0px 0px 0px 0px;
+    padding:                        0px;
+    position:                       center;
+}
+
+entry {
+    background-color:               @background;
+    text-color:                     @foreground;
+    padding: 					    10px 0px 0px 0px;
+    border:                  		2px 2px 2px 0px;
+    border-radius:                  0px;
+    border-color:                  	@accent;
+}
+
+listview {
+	padding:                        40px 20px 20px 20px;
+}
+
+
+mode-switcher {
+}
+
+button {
+    padding:                        10px 10px 10px 10px;
+    background-color:               @background-light;
+}
+
+button.selected {
+    border:                         0px 2px 2px 2px;
+    border-color:                   @accent;
+}
+
+element {
+    background-color:               @background-light;
+    text-color:                     @foreground;
+    orientation:                    vertical;
+    border-radius:                  0px;
+    padding: 					    10px 10px 10px 10px;
+}
+
+element selected {
+    background-color:               @accent;
+    text-color:                     @background;
+    border:                  		0px;
+    border-radius:                  0px;
+    border-color:                  	@border;
+}
+
+element selected.urgent {
+    background-color:               @on;
+    text-color:                     @background;
+}
+
+element selected.active {
+    background-color:               @off;
+    color:                          @background;
+}

@@ -1,0 +1,44 @@
+#!/bin/bash
+
+printhelp () {
+    echo -e "All the options:\n" \
+        "\e[34m -h        show this menu\n" \
+        "\e[34m -o        values separeted by ; to choose from\n" \
+        "\e[34m -f        font type and size\n" \
+        "\e[34m -q        right description\n" \
+        "\e[34m -d        left description"
+    exit 1
+}
+
+
+### Standard options ###
+opt=$(echo -e "yes\nno")
+query='Are you sure?'
+descr='There is no turning back.'
+font='Source Code Pro 40'
+
+# Parse the args
+while getopts ":o:f:s:q:d:h" o; do
+    case "${o}" in
+        h) printhelp ;;
+        o) opt=$(echo ${OPTARG} | tr ';' '\n') ;;
+        f) font=${OPTARG} ;;
+        q) query=${OPTARG} ;;
+        d) descr=${OPTARG} ;;
+        *) echo "invalid option"; exit 1 ;;
+    esac
+done
+
+rofi_command="rofi -theme applet.rasi"
+name='#textbox-prompt-colon { str: "'$query'"; }'
+name2='#element { font: "'$font'"; }'
+chosen="$(echo "$opt" | $rofi_command -dmenu -p "$descr" -theme-str "$name" -theme-str "$name2")"
+
+# print the index
+index=$(echo "${opt/$chosen//}" | grep -xn / | cut -d: -f1)
+
+if [ -z "${index-}" ]; then
+    echo -1
+else
+    echo $index
+fi

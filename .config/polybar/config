@@ -1,0 +1,251 @@
+;==========================================================
+;
+;
+;   ██████╗  ██████╗ ██╗  ██╗   ██╗██████╗  █████╗ ██████╗
+;   ██╔══██╗██╔═══██╗██║  ╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗
+;   ██████╔╝██║   ██║██║   ╚████╔╝ ██████╔╝███████║██████╔╝
+;   ██╔═══╝ ██║   ██║██║    ╚██╔╝  ██╔══██╗██╔══██║██╔══██╗
+;   ██║     ╚██████╔╝███████╗██║   ██████╔╝██║  ██║██║  ██║
+;   ╚═╝      ╚═════╝ ╚══════╝╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
+;
+;
+;   To learn more about how to configure Polybar
+;   go to https://github.com/polybar/polybar
+;
+;   The README contains a lot of information
+;
+;==========================================================
+;=======================definitions========================
+
+[colors]
+;background of main monitor bar, i3 tiles, i3 selected tiles
+bg-main             = #77000000
+bg-i3               = #bb000000
+selected            = #00E6FF
+;color of text, icons, text if screen is focused
+fg                  = #D3D3D3
+fg-alt              = #DDA9A9A9
+fg-foc              = #333
+;white, transparent
+underline           = #FFFFFF
+trans               = #00000000
+
+
+[fonts]
+main                = "Cantarell:pixelsize=10;2"
+main-high           = "Cantarell:pixelsize=10;1"
+icon                = "FontAwesome5Free:pixelsize=11;2"
+icon-high           = "FontAwesome5Free:pixelsize=11;1"
+icon-nf             = "3270SemiNarrowNF:pixelsize=22;4"
+icon-nf2            = "3270SemiNarrowNF:pixelsize=14;2"
+
+
+[sizes]
+;screen width of bar, bar height, height of underlining, if middle must be exact
+x                   = 100%
+y                   = 22
+under               = 1
+true-mid            = true
+
+
+[padding]
+all                 = 2
+right               = 2
+bg                  = 2
+;margin (on one side of the bar)
+mg-l                = 1
+mg-r                = 1
+
+
+[settings]
+screenchange-reload = true
+
+
+;==================making the bar==========================
+[bar/main]
+;most important, the monitor
+monitor             = ${env:MONITOR_MAIN:DP-1}
+
+;defining
+background          = ${colors.bg-main}
+foreground          = ${colors.fg}
+font-0              = ${fonts.main}
+font-1              = ${fonts.main-high}
+font-2              = ${fonts.icon}
+font-3              = ${fonts.icon-high}
+font-4              = ${fonts.icon-nf}
+width               = ${sizes.x}
+height              = ${sizes.y}
+line-size           = ${sizes.under}
+fixed-center        = ${sizes.true-mid}
+padding-all         = ${padding.all}
+padding-right       = ${padding.right}
+padding-background  = ${padding.bg}
+module-margin-left  = ${padding.mg-l}
+module-margin-right = ${padding.mg-r}
+
+;making the bar
+modules-left        = i3
+modules-center      = date sep time
+modules-right       = crypto sep cpu sep memory sep volume sep network
+
+cursor-click        = pointer
+
+;==================making the laptop bar===================
+[bar/laptop]
+monitor             = ${env:MONITOR_MAIN:eDP}
+background          = ${colors.bg-main}
+foreground          = ${colors.fg}
+font-0              = ${fonts.main}
+font-1              = ${fonts.main-high}
+font-2              = ${fonts.icon}
+font-3              = ${fonts.icon-high}
+font-4              = ${fonts.icon-nf}
+font-5              = ${fonts.icon-nf2}
+width               = ${sizes.x}
+height              = ${sizes.y}
+line-size           = ${sizes.under}
+fixed-center        = ${sizes.true-mid}
+padding-all         = ${padding.all}
+padding-right       = ${padding.right}
+padding-background  = ${padding.bg}
+module-margin-left  = ${padding.mg-l}
+module-margin-right = ${padding.mg-r}
+
+;making the bar
+modules-left        = i3
+modules-center      = date sep time
+modules-right       = crypto sep cpu sep memory sep volume sep battery sep network
+
+cursor-click        = pointer
+
+
+;=======================i3 module==========================
+[module/i3]
+type                        = internal/i3
+index-sort                  = true
+wrapping-scroll             = false
+reverse-scroll              = false
+pin-workspaces              = true
+
+
+ws-icon-0                   = 1;ﮟ
+ws-icon-1                   = 2;
+ws-icon-2                   = 3;
+ws-icon-3                   = 4;
+ws-icon-default             = x
+
+format                      = <label-state>
+
+label-focused               = %{T6}%icon%%{T-}
+label-focused-background    = ${colors.selected}
+label-focused-foreground    = ${colors.fg-foc}
+label-focused-padding       = ${padding.all}
+
+label-unfocused             = %{T6}%icon%%{T-}
+label-unfocused-background  = ${colors.bg-i3}
+label-unfocused-padding     = ${padding.all}
+
+label-visible               = %{T6}%icon%%{T-}
+label-visible-background    = ${colors.bg-i3}
+label-visible-underline     = ${colors.underline}
+label-visible-padding       = ${padding.all}
+
+label-urgent                = %{T6}%icon%%{T-}
+label-urgent-background     = ${colors.selected}
+label-urgent-padding        = ${padding.all}
+
+
+;==================costum modules==========================
+[module/sep]
+type                        = custom/text
+content                     = %{T4}|%{T-}
+content-foreground          = ${colors.fg}
+
+
+[module/crypto]
+type                        = custom/script
+interval                    = 15
+format-prefix               = "%{T4}%{T-} "
+format-prefix-foreground    = ${colors.fg-alt}
+label                       = %output%
+exec                        = python3 ~/.config/polybar/crypto.py
+
+
+;=====================built-in modules=====================
+[module/cpu]
+type                        = internal/cpu
+interval                    = 2
+format-prefix               = "%{T2}%{T-} "
+format-prefix-foreground    = ${colors.fg-alt}
+label                       = %percentage%%
+
+
+[module/memory]
+type                        = internal/memory
+interval                    = 2
+format-prefix               = "%{T3}%{T-} "
+format-prefix-foreground    = ${colors.fg-alt}
+label                       = %gb_used%
+
+
+[module/network]
+type                        = internal/network
+interface                   = ${env:INTERFACE:wlp1s0}
+interval                    = 3
+format-connected            = <label-connected>
+label-connected             = %signal%%
+format-connected-prefix     = "%{T2}%{T-} "
+format-connected-prefix-foreground = ${colors.fg-alt}
+format-disconnected         = No Wi-Fi Connection
+
+
+[module/date]
+type                        = internal/date
+interval                    = 300
+date-alt                    = "%Y-%m-%d"
+date                        = "%a %d-%b"
+label                       = %date%
+format-prefix               = "%{T4}%{T-} "
+format-prefix-foreground    = ${colors.fg-alt}
+
+
+[module/time]
+type                        = internal/date
+interval                    = 5
+time                        = %H:%M:%S
+label                       = %time%
+format-prefix               = "%{T2}%{T-} "
+format-prefix-foreground    = ${colors.fg-alt}
+
+
+[module/volume]
+type                        = internal/pulseaudio
+interval                    = 5
+format-volume               = <label-volume>
+format-volume-prefix        = "%{T2} %{T-}"
+format-volume-prefix-foreground = ${colors.fg-alt}
+label-muted                 = MUTED
+label-volume                = %percentage%%
+
+
+;=====================laptop modules=======================
+[module/battery]
+type                        = internal/battery
+full-at                     = 99
+battery                     = ${env:BATTERY:BAT1}
+adapter                     = ${env:ADAPTER:ACAD}
+poll-interval               = 5
+interval                    = 5
+format-charging             = <label-charging>
+format-discharging          = <label-discharging>
+format-full                 = <label-full>
+format-charging-prefix      = "%{T6} %{T-}"
+format-discharging-prefix   = "%{T6} %{T-}"
+format-full-prefix          = "%{T6} %{T-}"
+format-charging-prefix-foreground       = ${colors.fg-alt}
+format-discharging-prefix-foreground    = ${colors.fg-alt}
+format-full-prefix-foreground           = ${colors.fg-alt}
+label-charging              = %percentage%%
+label-discharging           = %percentage%%
+label-full                  = 100%

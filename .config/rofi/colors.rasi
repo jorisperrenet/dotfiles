@@ -1,0 +1,11 @@
+/* colors */
+* {
+  accent:           #0aa;
+  background:       #050;
+  background-light: #222;
+  background-focus: #099;
+  foreground:       #ddd;
+  foreground-list:  #f00;
+  on:               #f00;
+  off:              #f00;
+}
