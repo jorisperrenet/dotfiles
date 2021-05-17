@@ -1,10 +1,6 @@
 # To run any the main executable instead of the aliased one preceed
 # the command with `\`, e.g. `\rg`.
 
-# alias ctags="`brew --prefix`/bin/ctags"
-
-# alias bat="batcat"
-alias brave="brave-browser"
 alias clip="xclip -sel clip"
 
 # Might also be interesting to look into LS_COLORS to define how files
