@@ -44,7 +44,7 @@ set $term alacritty
 # opening windows
 bindsym $mod+Return      exec $term
 bindsym $mod+b           exec qutebrowser
-bindsym $mod+Shift+b     exec /usr/bin/brave-browser-stable
+bindsym $mod+Shift+b     exec brave
 bindsym $mod+r           exec $term -e ranger
 bindsym $mod+Shift+m     exec $term -e htop
 bindsym $mod+n           exec nautilus -w
