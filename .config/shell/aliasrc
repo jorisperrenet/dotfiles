@@ -6,7 +6,6 @@
 # alias bat="batcat"
 alias brave="brave-browser"
 alias clip="xclip -sel clip"
-alias fd="fdfind"
 
 # Might also be interesting to look into LS_COLORS to define how files
 # and directories are colored when using the `ls` command.
@@ -15,9 +14,11 @@ alias ll="ls -gbAG --color=auto --block-size=KiB --quoting-style=escape --time-s
 # nvim-lspconfig plugin. NOTE: this double alias makes it so that
 # calling "vim" actually calls the appimage as well.
 alias vim="nvim"
-
 #
-alias dfg="/usr/bin/git --git-dir=/home/$USER/.local/share/dotfiles --work-tree=/home/$USER"
+# Mnemonic: dotfiles git. Alias to manage the dotfiles as a bare git
+# repository.
+alias dfg="/usr/bin/git --git-dir=$XDG_DATA_HOME/dotfiles --work-tree=$HOME"
+
 # Specify ignore file, which takes lowest precedence of all ignore
 # files. The additional benefit is that it does not polute the $HOME
 # directory.

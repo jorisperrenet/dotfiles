@@ -3,10 +3,11 @@
 printhelp () {
     echo -e "All the options:\n" \
         "\e[34m -h        show this menu\n" \
+        "\e[34m -s        make searchable (-d gets ignored)\n" \
         "\e[34m -o        values separeted by ; to choose from\n" \
         "\e[34m -f        font type and size\n" \
-        "\e[34m -q        right description\n" \
-        "\e[34m -d        left description"
+        "\e[34m -d        right description\n" \
+        "\e[34m -q        left description"
     exit 1
 }
 

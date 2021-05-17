@@ -266,9 +266,9 @@ def main(win):
     monitors = subprocess.check_output('xrandr --prop | grep -w connected', shell=True)
     monitors = monitors.decode('utf-8').split('\n')[:-1]
     # monitors = ['DP-1 connected 1920x1080+0+0 (normal left inverted right x axis y axis) 798mm x 335mm',
-                # 'DP-2 connected 1920x1080+0+0 (normal left inverted right x axis y axis) 798mm x 335mm',
-                # 'DP-3 connected 1920x1080+0+0 (normal left inverted right x axis y axis) 798mm x 335mm',
-                # 'HDMI-1 connected 1920x1080+0+0 (normal left inverted right x axis y axis) 798mm x 335mm']
+    #             'DP-2 connected 1920x1080+0+0 (normal left inverted right x axis y axis) 798mm x 335mm',
+    #             'DP-3 connected 1920x1080+0+0 (normal left inverted right x axis y axis) 798mm x 335mm',
+    #             'HDMI-1 connected 1920x1080+0+0 (normal left inverted right x axis y axis) 798mm x 335mm']
     output = monitors[:]
 
 
