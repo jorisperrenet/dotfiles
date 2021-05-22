@@ -1,6 +1,5 @@
 #!/bin/sh
 
-
 # map escape to caps lock for vim
 setxkbmap -option caps:escape &
 
@@ -8,22 +7,20 @@ setxkbmap -option caps:escape &
 xrandr -r 85 &
 
 dunst &
-xrdb ${XDG_CONFIG_HOME:-$HOME/.config}/x11/xresources &	# Uncomment to use Xresources colors/settings on startup
+xrdb ${XDG_CONFIG_HOME:-$HOME/.config}/x11/xresources &
 # monitor setup
 python3 ${XDG_CONFIG_HOME:-$HOME/.config}/mon_setup/setup.py &
 
-# background
-feh --bg-fill ~/wallpapers/main.jpg
-
-# polybar
-sleep .5; . ${XDG_CONFIG_HOME:-$HOME/.config}/polybar/launch.sh &
+# background, custom script
+setbg
 
 ## Wait until the processes have been shut down
-# pkill redshift &
-# while pgrep redshift >/dev/null; do sleep 1; done; redshift &
 redshift -P &
 pkill picom &
 while pgrep picom >/dev/null; do sleep 1; done; picom &
+
+# polybar
+sleep .5; . ${XDG_CONFIG_HOME:-$HOME/.config}/polybar/launch.sh &
 
 # startup message
 notify-send "everything is done" "startup/restart completed"

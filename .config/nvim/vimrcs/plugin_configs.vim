@@ -45,9 +45,9 @@ let g:lightline.tab = {
 " => Vimwiki
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Register a vimwiki different from the default
-let g:vimwiki_list = [{'path': '~/Documents/vimwiki/',
-    \ 'path_html': '~/Documents/vimwiki/vimwiki-html/',
-    \ 'template_path': '~/Documents/vimwiki/vimwiki-styling/',
+let g:vimwiki_list = [{'path': '~/desktop/boeken/vimwiki/',
+    \ 'path_html': '~/desktop/boeken/vimwiki/vimwiki-html/',
+    \ 'template_path': '~/desktop/boeken/vimwiki/vimwiki-styling/',
     \ 'template_default': 'default',
     \ 'template_ext': '.html',
     \ 'auto_export': 0,

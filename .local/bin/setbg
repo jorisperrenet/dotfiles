@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# wallpaper directory
+dir=$HOME/wallpapers
+
+# pick random file
+file=$(ls $dir | sort -R | tail -1)
+
+# run command
+feh --bg-fill $dir/$file
