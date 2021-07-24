@@ -20,4 +20,5 @@ alias dfg="/usr/bin/git --git-dir=$XDG_DATA_HOME/dotfiles --work-tree=$HOME"
 # directory.
 alias rg="rg --ignore-file=$XDG_CONFIG_HOME/ripgrep/ignore"
 
-alias w3m="w3m -o ext_image_viewer=0"
+# alias w3m="w3m -o ext_image_viewer=0"
+alias vimgolf="$HOME/.local/share/gem/ruby/3.0.0/bin/vimgolf"

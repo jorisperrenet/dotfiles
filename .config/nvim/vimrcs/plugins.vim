@@ -30,6 +30,7 @@ Plug 'godlygeek/tabular'
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'
 Plug 'rust-lang/rust.vim'
+Plug 'lervag/vimtex'
 
 " Searching
 Plug 'mileszs/ack.vim'
@@ -45,7 +46,12 @@ Plug 'tpope/vim-commentary'
 Plug 'mattn/emmet-vim'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'vimwiki/vimwiki'
-Plug 'maxbrunsfeld/vim-yankstack'
+" Plug 'maxbrunsfeld/vim-yankstack'
+" Plug 'Shougo/neoyank.vim'
+" Plug 'mg979/vim-yanktools'
+" Plug 'svermeulen/vim-easyclip'
+" Plug 'machakann/vim-highlightedyank'
+" Plug 'bfredl/nvim-miniyank'
 
 " All of your Plugins must be added before the following line
 call plug#end()

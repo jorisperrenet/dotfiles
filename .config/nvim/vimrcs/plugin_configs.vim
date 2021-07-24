@@ -69,7 +69,7 @@ let g:ctrlp_user_command = {
 \ 'types': {
   \ 1: ['.git', 'git ls-files -co --exclude-standard'],
   \ },
-\ 'fallback': 'fdfind --hidden --type file'
+\ 'fallback': 'fd --hidden --type file'
 \ }
 
 let g:ctrlp_working_path_mode = 0
@@ -129,15 +129,6 @@ map <leader>f :Ack!<Space>
 
 
 """"""""""""""""""""""""""""""
-" => YankStack
-""""""""""""""""""""""""""""""
-let g:yankstack_yank_keys = ['y', 'd', 'c']
-
-nmap <c-p> <Plug>yankstack_substitute_older_paste
-nmap <c-n> <Plug>yankstack_substitute_newer_paste
-
-
-""""""""""""""""""""""""""""""
 " => comfortable motion
 """"""""""""""""""""""""""""""
 " Otherwise the <C-f> will overwrite the CtrlP mapping
@@ -190,6 +181,11 @@ vnoremap <leader>t :Tab /
 "" => Emmet-vim
 """""""""""""""""""""""""""""""
 "let g:user_emmet_leader_key='<C-Y>'
+
+"""""""""""""""""""""""""""""""
+"" => vimtex
+"""""""""""""""""""""""""""""""
+let g:vimtex_view_method = 'zathura'
 
 """"""""""""""""""""""""""""""
 " => LSP

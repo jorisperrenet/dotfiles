@@ -107,8 +107,8 @@ bindsym $mod+e              layout     toggle split
 # move focused container to workspace
 
 # main
-bindsym $mod+space          workspace 1
-bindsym $mod+Shift+space    move container to workspace 1
+bindsym $mod+u              workspace 1
+bindsym $mod+Shift+u        move container to workspace 1
 
 # second/terminals
 bindsym $mod+i              workspace 2
@@ -123,8 +123,8 @@ bindsym $mod+semicolon      workspace 4
 bindsym $mod+Shift+semicolon move container to workspace 4
 
 # back and forth
-bindsym $mod+Tab            workspace back_and_forth
-bindsym $mod+Shift+Tab      move container to workspace back_and_forth
+bindsym $mod+space          workspace back_and_forth
+bindsym $mod+Shift+space    move container to workspace back_and_forth
 
 # resize
 bindsym $mod+Up             resize grow   width 100 px
