@@ -5,3 +5,5 @@ i3-msg restart
 
 . ${XDG_CONFIG_HOME:-$HOME/.config}/x11/xprofile &
 
+source "$HOME/.zprofile" &
+

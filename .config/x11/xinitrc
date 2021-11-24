@@ -14,6 +14,6 @@ else
 	. "$HOME/.xprofile"
 fi
 
-source "$HOME/.zprofile"
+# source "$HOME/.zprofile"
 
 exec i3

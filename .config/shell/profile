@@ -23,6 +23,8 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
 # ---
+export XINITRC="$HOME/.xinitrc"
+# ---
 export HISTFILE="$XDG_DATA_HOME/history"
 export INPUTRC="$XDG_CONFIG_HOME/inputrc"
 export PYTHONSTARTUP="$XDG_CONFIG_HOME/python/pythonrc"
@@ -42,15 +44,13 @@ export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
 export PSQLRC="$XDG_CONFIG_HOME/pg/psqlrc"
 export PSQL_HISTORY="$XDG_CACHE_HOME/pg/psql_history"
 
-# Looking to get something done in zsh? Have a look at:
-#       man zshall
-# and ofcourse:
-#       http://zsh.sourceforge.net/Guide/zshguide.html
-
 # If not running interactively, don't do anything
 
-# Load the aliases.
+# Start an Xorg display server using the `xstart` frontend if it is not
+# already running.
+! pidof -s Xorg >/dev/null 2>&1 && exec startx "$XINITRC"
 
+# Load the aliases.
 ### Set some environment variables
 # Main monitor for polybar
 monitor="$(xrandr | grep -w -m1 connected | awk '{print $1}')"

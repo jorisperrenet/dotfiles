@@ -36,8 +36,7 @@ main                = "Cantarell:pixelsize=10;2"
 main-high           = "Cantarell:pixelsize=10;1"
 icon                = "FontAwesome5Free:pixelsize=11;2"
 icon-high           = "FontAwesome5Free:pixelsize=11;1"
-icon-nf             = "3270SemiNarrowNF:pixelsize=22;4"
-icon-nf2            = "3270SemiNarrowNF:pixelsize=14;2"
+icon-nf             = "3270MediumNerdFontMono:pixelsize=20;4"
 
 
 [sizes]
@@ -101,7 +100,6 @@ font-1              = ${fonts.main-high}
 font-2              = ${fonts.icon}
 font-3              = ${fonts.icon-high}
 font-4              = ${fonts.icon-nf}
-font-5              = ${fonts.icon-nf2}
 width               = ${sizes.x}
 height              = ${sizes.y}
 line-size           = ${sizes.under}
