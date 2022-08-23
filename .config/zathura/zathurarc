@@ -13,13 +13,20 @@ map J zoom out
 map i recolor
 map p print
 
+# map <Down> navigate next
+# map <Right> navigate next
+# map <Button1> navigate next
+
+# map <Up> navigate previous
+# map <Left> navigate previous
+# map <Button3> navigate previous
+
 
 
 set recolor "true"
 
-# set default-bg                  "#eadbcb"
-set default-bg                  "#116"
-set default-fg                  "#fff"
+set default-bg                  "#228"
+set default-fg                  "#eee"
 set recolor-lightcolor          "rgba(0, 0, 0, 0)"
 
 
@@ -46,6 +53,7 @@ set highlight-active-color      "#fda"
 
 
 
+set adjust-open "best-fit"
 
 
 set window-title-home-tilde true

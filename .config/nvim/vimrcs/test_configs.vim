@@ -6,18 +6,12 @@ set relativenumber
 
 " Great for Python or structuring note taking
 if has('folding')
-    set foldmethod=indent
+    set foldmethod=manual
     set foldnestmax=3
     " If zero, all folds are closed.
     set foldlevelstart=3
 endif
 
-" Copy file content to clipboard
-if has("mac") || has("macunix")
-    nmap <silent> <leader>cf :! pbcopy < %<CR>
-elseif has("unix")
-    nmap <silent> <leader>cf :! cat % \| xclip -selection c<CR>
-endif
 
 " When a sentence spans multiple lines, show a special character for the break
 " and color this character the same as the line numbers
@@ -29,9 +23,6 @@ hi! link NonText LineNr
 " Open the definition in a vertical split
 map <C-\> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
 
-" Yank selection to clipboard
-vnoremap <leader>y "+y
-
 " Enable mouse
 set mouse=a
 
@@ -39,7 +30,7 @@ set mouse=a
 "set conceallevel=2
 
 " cursorline
-hi CursorLine cterm=NONE ctermbg=53
+hi CursorLine cterm=NONE ctermbg=58
 augroup CursorLine
     au!
     au VimEnter * setlocal cursorline
@@ -53,7 +44,7 @@ function! BlinkCursorline()
     sleep 100m
     set cursorline!
 endfunction
-nnoremap <leader>c :call BlinkCursorline()<CR>
+nnoremap <leader>i :call BlinkCursorline()<CR>
 
 " Preview window settings.
 set completeopt=menu,menuone,noinsert,noselect
@@ -85,23 +76,12 @@ endif
 " to left to right to left....
 set signcolumn=yes
 
-" Use Esc in terminal to enter normal mode. This does interfere
-" with the vi-mode from zsh, but this does not matter as it has
-" the exact same functionality.
-tnoremap <Esc> <C-\><C-n>
-
-" Switch between last opened buffers. This is easier to press.
-nnoremap <C-s> <C-^>
-
-" Switch between last accessed window
-nnoremap <leader>p <C-w>p
-
 " Set window title of terminal (used for searching open windows)
 set title
 set titlestring=Nvim:\ %t%(\ %M%)%(\ (%{expand(\"%:~:.:h\")})%)%(\ %a%)%(\ (%{getcwd()})%)
 
-nnoremap <leader>cn :cnext<CR>
-nnoremap <leader>cp :cprev<CR>
+nnoremap <leader>in :cnext<CR>
+nnoremap <leader>ip :cprev<CR>
 nnoremap <C-q> :call QFixToggle()<CR>
 
 " https://vim.fandom.com/wiki/Toggle_to_open_or_close_the_quickfix_window

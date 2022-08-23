@@ -52,3 +52,9 @@ au BufRead,BufNewFile *.tf set filetype=terraform
 
 " Improve readability
 au FileType terraform setlocal sw=2 ts=2
+
+
+
+
+au BufRead,BufNewFile *.kv set filetype=kivy
+au FileType kivy setlocal commentstring=#\ %s

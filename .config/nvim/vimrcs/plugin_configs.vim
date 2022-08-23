@@ -1,8 +1,59 @@
+" VIMTEX
+" This is necessary for VimTeX to load properly. The "indent" is optional.
+" Note that most plugin managers will do this automatically.
+filetype plugin indent on
+
+" This enables Vim's and neovim's syntax-related features. Without this, some
+" VimTeX features will not work (see ":help vimtex-requirements" for more
+" info).
+syntax enable
+
+" Viewer options: One may configure the viewer either by specifying a built-in
+" viewer method:
+let g:vimtex_view_method = 'zathura'
+
+" VimTeX uses latexmk as the default compiler backend. If you use it, which is
+" strongly recommended, you probably don't need to configure anything. If you
+" want another compiler backend, you can change it as follows. The list of
+" supported backends and further explanation is provided in the documentation,
+" see ":help vimtex-compiler".
+
+let g:vimtex_compiler_method = 'latexmk'
+" let g:vimtex_compiler_method = 'xelatex'
+
+" Most VimTeX mappings rely on localleader and this can be changed with the
+" following line. The default is usually fine and is the symbol "\".
+let maplocalleader = " "
+
+
+
+
+
+
+
 """"""""""""""""""""""""""""""
 " => Colorscheme and Fonts
 """"""""""""""""""""""""""""""
-set background=dark
-colorscheme peaksea
+set termguicolors
+
+
+let g:sonokai_style = 'andromeda'
+let g:sonokai_enable_italic = 1
+let g:sonokai_disable_italic_comment = 1
+let g:sonokai_transparent_background = 1
+
+colorscheme sonokai
+
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "maintained",
+  highlight = {
+    enable = true,
+  }
+}
+EOF
+
+
 
 " OMG, without this the signcolumn is displayed as DarkGreen
 " ... so ugly
@@ -42,201 +93,176 @@ let g:lightline.tab = {
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Vimwiki
+" => lsp signature
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Register a vimwiki different from the default
-let g:vimwiki_list = [{'path': '~/desktop/boeken/vimwiki/',
-    \ 'path_html': '~/desktop/boeken/vimwiki/vimwiki-html/',
-    \ 'template_path': '~/desktop/boeken/vimwiki/vimwiki-styling/',
-    \ 'template_default': 'default',
-    \ 'template_ext': '.html',
-    \ 'auto_export': 0,
-    \ 'nested_syntaxes': {'python': 'python'},
-    \ 'automatic_nested_syntaxes': 1}]
+lua <<EOF
+ cfg = {
+  debug = false, -- set to true to enable debug logging
+  log_path = vim.fn.stdpath("cache") .. "/lsp_signature.log", -- log dir when debug is on
+  -- default is  ~/.cache/nvim/lsp_signature.log
+  verbose = false, -- show debug line number
 
-" Parse open vimwiki to html
-nmap <leader>wc <Plug>Vimwiki2HTML
-" Parse the entire vimwiki
-nmap <leader>wC <Plug>VimwikiAll2HTML
+  bind = true, -- This is mandatory, otherwise border config won't get registered.
+               -- If you want to hook lspsaga or other signature handler, pls set to false
+  doc_lines = 100, -- will show two lines of comment/doc(if there are more than two lines in doc, will be truncated);
+                 -- set to 0 if you DO NOT want any API comments be shown
+                 -- This setting only take effect in insert mode, it does not affect signature help in normal
+                 -- mode, 10 by default
+
+  floating_window = true, -- show hint in a floating window, set to false for virtual text only mode
+
+  floating_window_above_cur_line = true, -- try to place the floating above the current line when possible Note:
+  -- will set to true when fully tested, set to false will use whichever side has more space
+  -- this setting will be helpful if you do not want the PUM and floating win overlap
+
+  floating_window_off_x = 20, -- adjust float windows x position.
+  floating_window_off_y = 20, -- adjust float windows y position.
 
 
-""""""""""""""""""""""""""""""
-" => CTRL-P
-""""""""""""""""""""""""""""""
-" When inside a git repository, make sure to stage deleted files as
-" otherwise they will be included in the files.
-let g:ctrlp_user_command = {
-\ 'types': {
-  \ 1: ['.git', 'git ls-files -co --exclude-standard'],
-  \ },
-\ 'fallback': 'fd --hidden --type file'
-\ }
+  fix_pos = false,  -- set to true, the floating window will not auto-close until finish all parameters
+  hint_enable = true, -- virtual hint enable
+  hint_prefix = "🐼 ",  -- Panda for parameter
+  hint_scheme = "String",
+  hi_parameter = "LspSignatureActiveParameter", -- how your parameter will be highlight
+  max_height = 5, -- max height of signature floating_window, if content is more than max_height, you can scroll down
+                   -- to view the hiding contents
+  max_width = 80, -- max_width of signature floating_window, line will be wrapped if exceed max_width
+  handler_opts = {
+    border = "rounded"   -- double, rounded, single, shadow, none
+  },
 
-let g:ctrlp_working_path_mode = 0
+  always_trigger = false, -- sometime show signature on new line or in middle of parameter can be confusing, set it to false for #58
 
-let g:ctrlp_map = '<c-f>'
-let g:ctrlp_max_height = 20
-let g:ctrlp_custom_ignore = 'node_modules\|^\.DS_Store\|^\.git
-            \^\.coffee\|^\venv\|^\.mypy_cache\|^\.egg-info'
+  auto_close_after = nil, -- autoclose signature float win after x sec, disabled if nil.
+  extra_trigger_chars = {"(", ","}, -- Array of extra characters that will trigger signature completion, e.g., {"(", ","}
+  zindex = 200, -- by default it will be on top of all floating windows, set to <= 50 send it to bottom
 
-" Customize the mappings inside the CtrlP's prompt
-" let g:ctrlp_pompt_mappings = {
-"     \ 'PrtClearCache()':      ['<F5>'],
-"     \ }
+  padding = '', -- character to pad on left and right of signature can be ' ', or '|'  etc
 
-let g:ctrlp_extensions = ['buffertag']
+  transparency = nil, -- disabled by default, allow floating win transparent value 1~100
+  shadow_blend = 36, -- if you using shadow as border use this set the opacity
+  shadow_guibg = 'Black', -- if you using shadow as border use this set the color e.g. 'Green' or '#121315'
+  timer_interval = 200, -- default timer check interval set to lower value if you want to reduce latency
+  toggle_key = '<C-Space>' -- toggle signature on and off in insert mode,  e.g. toggle_key = '<M-x>'
+}
 
-nnoremap <C-b> :CtrlPBuffer<CR>
-
-" Ask for another character after <C-o> to specify how to open
-" the marked (with <C-z>) files.
-let g:ctrlp_arg_map = 1
-
-let g:ctrlp_show_hidden = 1
-let g:ctrlp_cache_dir = $XDG_CACHE_HOME.'/ctrlp'
+-- recommended:
+require'lsp_signature'.setup(cfg)
+EOF
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Ack searching
+" => autopairs
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" ripgrep is the fastest of them all and does not have gitignore issues
-if executable('rg')
-  let g:ackprg = 'rg --vimgrep --smart-case'
-elseif executable('ag')
-    " Use the the_silver_searcher if possible (much faster than Ack)
-  let g:ackprg = 'ag --vimgrep --smart-case'
-endif
+lua <<EOF
+    local npairs = require('nvim-autopairs')
+    npairs.setup{}
 
-" Highlight the search term in the results
-let g:ackhighlight = 1
+    -- put this to setup function and press <a-e> to use fast_wrap
+    npairs.setup({
+        fast_wrap = {},
+    })
 
-" Options --color and --group disable the function to follow links,
-" which is obvisouly undesired
-let g:ack_default_options = ' -s -H --nogroup
-                    \ --ignore-dir={venv,.egg-info,.mypy_cache}'
-
-let g:ack_qhandler = "botright copen 10"
-
-" Without this option the shortcuts, e.g. open in split, won't work
-let g:ack_apply_qmappings = 1
-
-" Every time you type :Ack it actually becomes :Ack! which does not
-" follow the first result from the search.
-" cnoreabbrev Ack Ack!
-
-" :help key-notation
-map <leader>f :Ack!<Space>
+    -- change default fast_wrap
+    npairs.setup({
+        fast_wrap = {
+          map = '<C-p>',
+          chars = { '{', '[', '(', '"', "'" },
+          pattern = string.gsub([[ [%'%"%)%>%]%)%}%,] ]], '%s+', ''),
+          offset = 0, -- Offset from pattern match
+          end_key = 'l',
+          keys = 'qwertyuiopzxcvbnmasdfghjk',
+          check_comma = true,
+          highlight = 'Search',
+          highlight_grey='Comment'
+        },
+    })
 
 
-""""""""""""""""""""""""""""""
-" => comfortable motion
-""""""""""""""""""""""""""""""
-" Otherwise the <C-f> will overwrite the CtrlP mapping
-let g:comfortable_motion_no_default_key_mappings = 1
+    local disable_filetype = { "TelescopePrompt" }
+    local disable_in_macro = false  -- disable when recording or executing a macro
+    local disable_in_visualblock = false -- disable when insert after visual block mode
+    local ignored_next_char = string.gsub([[ [%w%%%'%[%"%.] ]],"%s+", "")
+    local enable_moveright = true
+    local enable_afterquote = true  -- add bracket pairs after quote
+    local enable_check_bracket_line = true  --- check bracket in same line
+    local check_ts = false
+    local map_bs = true  -- map the <BS> key
+    local map_c_h = false  -- Map the <C-h> key to delete a pair
+    local map_c_w = false -- map <c-w> to delete a pair if possible
 
-nnoremap <silent> <C-d> :call comfortable_motion#flick(100)<CR>
-nnoremap <silent> <C-u> :call comfortable_motion#flick(-100)<CR>
-
-
-""""""""""""""""""""""""""""""
-" => easymotion
-""""""""""""""""""""""""""""""
-" One mapping to rule them all! Jump to any word, anywhere.
-nmap <leader>j <Plug>(easymotion-overwin-w)
-
-
-""""""""""""""""""""""""""""""
-" => completion-nvim
-""""""""""""""""""""""""""""""
-let g:completion_matching_strategy_list = ['exact', 'substring']
-
-let g:completion_chain_complete_list = {
-    \'default' : [
-    \    {'complete_items': ['lsp']},
-    \    {'mode': '<c-p>'},
-    \    {'mode': '<c-n>'}
-    \]
-    \}
-
-let g:completion_trigger_character = ['.']
-let g:completion_trigger_keyword_length = 2
-
-" Otherwise matches starting with '_' will be first in the completion
-" list, whilst they are often the matches you want.
-let g:completion_sorting = 'none'
+    -- If you want insert `(` after select function or method item
+    local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+    local cmp = require('cmp')
+    cmp.event:on( 'confirm_done', cmp_autopairs.on_confirm_done({  map_char = { tex = '' } }))
 
 
-""""""""""""""""""""""""""""""
-" => Rust
-""""""""""""""""""""""""""""""
-let g:rustfmt_autosave = 1
+    -- add a lisp filetype (wrap my-function), FYI: Hardcoded = { "clojure", "clojurescript", "fennel", "janet" }
+    cmp_autopairs.lisp[#cmp_autopairs.lisp+1] = "racket"
+EOF
 
 
-""""""""""""""""""""""""""""""
-" => Tabular
-""""""""""""""""""""""""""""""
-vnoremap <leader>t :Tab /
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => lspconfig
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set completeopt+=menuone
 
-"""""""""""""""""""""""""""""""
-"" => Emmet-vim
-"""""""""""""""""""""""""""""""
-"let g:user_emmet_leader_key='<C-Y>'
+lua <<EOF
+    local lspconfig = require('lspconfig')
 
-"""""""""""""""""""""""""""""""
-"" => vimtex
-"""""""""""""""""""""""""""""""
-let g:vimtex_view_method = 'zathura'
+    -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
+    local servers = { 'clangd', 'rust_analyzer', 'tsserver', 'pylsp' }
+    for _, lsp in ipairs(servers) do
+      lspconfig[lsp].setup {
+        -- on_attach = my_custom_on_attach,
+        capabilities = capabilities,
+      }
+    end
 
-""""""""""""""""""""""""""""""
-" => LSP
-""""""""""""""""""""""""""""""
-" :LspInfo
-"
-" Configure a new Language Server:
-" https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md
-"
-" pyright:
-" * pyrightconfig.json
-" * https://github.com/microsoft/pyright/blob/master/docs/configuration.md
+    -- luasnip setup
+    local luasnip = require 'luasnip'
 
-" lua << EOF
-" local nvim_lsp = require('lspconfig')
-
-" -- Setup defaults
-" local settings = {
-"   pyright = { }
-" }
-
-" local on_attach = function(client, bufnr)
-"   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-"   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
-
-"   buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-"   -- Mappings.
-"   local opts = { noremap=true, silent=true }
-"   buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
-"   buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
-"   buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-"   buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-"   buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-
-"   -- Completion.
-"   local nvim_completion = require('completion')
-"   nvim_completion.on_attach(client, bufnr)
-" end
-
-" -- Use a loop to conveniently both setup defined servers
-" -- and map buffer local keybindings when the language server attaches
-" local servers = { "pyright", "tsserver", "rust_analyzer" }
-" for _, lsp in ipairs(servers) do
-"   nvim_lsp[lsp].setup { settings = settings[lsp], on_attach = on_attach }
-" end
-
-" vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-"     vim.lsp.diagnostic.on_publish_diagnostics, {
-"         virtual_text = true
-"     }
-" )
-
-" EOF
+    -- nvim-cmp setup
+    local cmp = require 'cmp'
+    cmp.setup {
+      snippet = {
+        expand = function(args)
+          require('luasnip').lsp_expand(args.body)
+        end,
+      },
+      mapping = {
+        ['<C-p>'] = cmp.mapping.select_prev_item(),
+        ['<C-n>'] = cmp.mapping.select_next_item(),
+        ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+        ['<C-f>'] = cmp.mapping.scroll_docs(4),
+        ['<C-e>'] = cmp.mapping.complete(),
+        ['<C-Space>'] = cmp.mapping.close(),
+        ['<CR>'] = cmp.mapping.confirm {
+          behavior = cmp.ConfirmBehavior.Replace,
+          select = true,
+        },
+        ['<Tab>'] = function(fallback)
+          if cmp.visible() then
+            cmp.select_next_item()
+          elseif luasnip.expand_or_jumpable() then
+            luasnip.expand_or_jump()
+          else
+            fallback()
+          end
+        end,
+        ['<S-Tab>'] = function(fallback)
+          if cmp.visible() then
+            cmp.select_prev_item()
+          elseif luasnip.jumpable(-1) then
+            luasnip.jump(-1)
+          else
+            fallback()
+          end
+        end,
+      },
+      sources = {
+        { name = 'nvim_lsp' },
+        { name = 'luasnip' },
+      },
+    }
+EOF

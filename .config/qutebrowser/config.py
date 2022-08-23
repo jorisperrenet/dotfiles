@@ -8,6 +8,8 @@ config.load_autoconfig()
 # Bindings
 c.bindings.default = {
     'normal': {
+        # Hotreload
+        '<Ctrl-r>': 'set content.user_stylesheets brightspace.css',
         # General
         '.': 'repeat-command',
         '/': 'set-cmd-text /',
@@ -373,7 +375,7 @@ c.confirm_quit = ['downloads']
 c.content.fullscreen.window = True
 c.content.javascript.can_open_tabs_automatically = True
 c.content.proxy = 'none'
-# c.content.user_stylesheets = ['user_dark.css']  # This is a list, so you can add more
+# c.content.user_stylesheets = ['brightspace.css']  # This is a list, so you can add more
 
 c.downloads.location.directory = '/home/joris/downloads/'
 c.downloads.location.prompt = True

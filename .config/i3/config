@@ -42,7 +42,10 @@ bindsym $mod+Shift+a sticky toggle
 set $term alacritty
 
 # opening windows
+bindsym $mod+g          exec "maim -u -m 10 -i $(xdotool getactivewindow) ~/downloads/floor/$(date +%s).jpg"
+
 bindsym $mod+Return      exec $term
+bindsym $mod+Shift+Return exec dev
 bindsym $mod+b           exec qutebrowser
 bindsym $mod+Shift+b     exec brave
 bindsym $mod+r           exec $term -e ranger

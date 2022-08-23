@@ -11,7 +11,6 @@ let s:vim_configs = expand('<sfile>:p:h')."/.."
 
 " Make the expansion occur in the plugins directory.
 call pathogen#infect(s:vim_configs.'/plugins/{}')
-call pathogen#infect(s:vim_configs.'/plugins_forked/{}')
 
 " Generate documentation of the plugins by invoking the :Helptags command.
 call pathogen#helptags()
@@ -24,34 +23,43 @@ let s:plugins_path=$XDG_CONFIG_HOME.'/nvim/plugins'
 call plug#begin(fnameescape(s:plugins_path))
 
 " Additional Plugins
-" Styling and filetypes
-Plug 'itchyny/lightline.vim'
-Plug 'godlygeek/tabular'
-Plug 'neovim/nvim-lspconfig'
-Plug 'nvim-lua/completion-nvim'
-Plug 'rust-lang/rust.vim'
-Plug 'lervag/vimtex'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
 
-" Searching
-Plug 'mileszs/ack.vim'
-Plug 'ctrlpvim/ctrlp.vim'
+" Colors
+Plug 'sainnhe/sonokai'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/playground'
+Plug 'itchyny/lightline.vim'
+
+" vimwiki
+" Plug 'vimwiki/vimwiki'
+
+" Latex writing
+Plug 'lervag/vimtex'
 
 " Jumping around
 Plug 'easymotion/vim-easymotion'
 
-" Other
-Plug 'yuttie/comfortable-motion.vim'
+" Commenting
 Plug 'tpope/vim-commentary'
-" Plug 'tpope/vim-fugitive'
+
+Plug 'lewis6991/gitsigns.nvim'
+
+Plug 'ray-x/lsp_signature.nvim'
+Plug 'L3MON4D3/luasnip'
+Plug 'saadparwaiz1/cmp_luasnip'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'neovim/nvim-lspconfig'
+
+Plug 'windwp/nvim-autopairs'
+
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+
 Plug 'mattn/emmet-vim'
-Plug 'michaeljsmith/vim-indent-object'
-Plug 'vimwiki/vimwiki'
-" Plug 'maxbrunsfeld/vim-yankstack'
-" Plug 'Shougo/neoyank.vim'
-" Plug 'mg979/vim-yanktools'
-" Plug 'svermeulen/vim-easyclip'
-" Plug 'machakann/vim-highlightedyank'
-" Plug 'bfredl/nvim-miniyank'
 
 " All of your Plugins must be added before the following line
 call plug#end()

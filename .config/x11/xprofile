@@ -9,7 +9,8 @@ xrandr -r 85 &
 dunst &
 xrdb ${XDG_CONFIG_HOME:-$HOME/.config}/x11/xresources &
 # monitor setup
-python3 ${XDG_CONFIG_HOME:-$HOME/.config}/mon_setup/setup.py &
+# python3 ${XDG_CONFIG_HOME:-$HOME/.config}/mon_setup/setup.py &
+xrandr --output eDP-1 --mode 1920x1080 --pos 960x1600 --rotate normal --auto --output HDMI-1 --mode 3840x1600 --pos 0x0 --rotate normal --auto
 
 # background, custom script
 setbg
@@ -20,7 +21,7 @@ pkill picom &
 while pgrep picom >/dev/null; do sleep 1; done; picom &
 
 # polybar
-sleep .5; . ${XDG_CONFIG_HOME:-$HOME/.config}/polybar/launch.sh &
+. ${XDG_CONFIG_HOME:-$HOME/.config}/polybar/launch.sh >> /home/joris/log.txt &
 
 # startup message
 notify-send "everything is done" "startup/restart completed"
