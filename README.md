@@ -23,15 +23,3 @@ The prevent git from listing untracked files run:
 ```bash
 dfg config --global status.showUntrackedFiles no
 ```
-
-### Vim
- My special thanks go out to the [Ultimate Vim configuration](https://github.com/amix/vimrc) by
- amix.
-
-Use [vim-plug](https://github.com/junegunn/vim-plug) to manage packages, run `:PluginInstall` to
-install the plugins (once inside Vim).
-
-### i3-gaps
-Disable the menubar of the terminal:
-1. *Edit* > *Preferences* > *General*
-2. Untick the *Show menubar by default in new terminals*
