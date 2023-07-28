@@ -22,16 +22,8 @@ client.focused  $select #285577 #ffffff #2e9ef4   $select
 ########################################
 # System
 ########################################
-# startup
-# exec_always bash "$XDG_CONFIG_HOME/startup.sh"
-# exec_always env > "/home/joris/test.log"
-# exec_always --no-startup-id polybar main
-# exec_always bash "/home/joris/.config/startup.sh"
-# exec_always bash "/home/joris/.config/polybar/launch.sh"
-
-
 # reload, custom script
-bindsym $mod+Shift+r exec res
+bindsym $mod+Shift+r exec restart
 bindsym $mod+Shift+a sticky toggle
 # bindsym $mod+Shift+z exec bash "$XDG_CONFIG_HOME"/i3-layout-manager/my.sh
 
@@ -42,34 +34,19 @@ bindsym $mod+Shift+a sticky toggle
 set $term alacritty
 
 # opening windows
-bindsym $mod+g          exec "maim -u -m 10 -i $(xdotool getactivewindow) ~/downloads/floor/$(date +%s).jpg"
-
 bindsym $mod+Return      exec $term
 bindsym $mod+Shift+Return exec dev
-bindsym $mod+b           exec qutebrowser
-bindsym $mod+Shift+b     exec brave
-bindsym $mod+r           exec $term -e ranger
+bindsym $mod+b           exec brave
 bindsym $mod+Shift+m     exec $term -e htop
 bindsym $mod+n           exec nautilus -w
 bindsym $mod+z           exec zathura
 
-# rofi
-bindsym $mod+d           exec bash "$XDG_CONFIG_HOME"/rofi/launcher.sh
-# bindsym $mod+i           exec bash "$XDG_CONFIG_HOME"/rofi/screenshot.sh
-bindsym $mod+x           exec bash "$XDG_CONFIG_HOME"/rofi/power.sh
-bindsym $mod+m           exec bash "$XDG_CONFIG_HOME"/rofi/menu.sh
-bindsym $mod+Shift+n     exec bash "$XDG_CONFIG_HOME"/rofi/network.sh
-bindsym $mod+p           exec bash "$XDG_CONFIG_HOME"/rofi/password/passwords.sh
-
-# monitor setup
-bindsym $mod+Shift+s     exec python3 "$XDG_CONFIG_HOME"/mon_setup/program.py
-
-# volume control (primarily for laptop)
-bindsym $mod+plus        exec "pulsemixer --change-volume +3"
-bindsym $mod+minus       exec "pulsemixer --change-volume -3"
-bindsym $mod+Shift+plus  exec "pulsemixer --unmute"
-bindsym $mod+Shift+minus exec "pulsemixer --mute"
-
+bindsym $mod+d           exec dmenu_path | dmenu
+# # volume control (primarily for laptop)
+# bindsym $mod+plus        exec "pulsemixer --change-volume +3"
+# bindsym $mod+minus       exec "pulsemixer --change-volume -3"
+# bindsym $mod+Shift+plus  exec "pulsemixer --unmute"
+# bindsym $mod+Shift+minus exec "pulsemixer --mute"
 
 ########################################
 # Window focus and movement
@@ -109,21 +86,35 @@ bindsym $mod+e              layout     toggle split
 # switch to workspace
 # move focused container to workspace
 
-# main
 bindsym $mod+u              workspace 1
-bindsym $mod+Shift+u        move container to workspace 1
-
-# second/terminals
 bindsym $mod+i              workspace 2
-bindsym $mod+Shift+i        move container to workspace 2
-
-# tools
 bindsym $mod+o              workspace 3
-bindsym $mod+Shift+o        move container to workspace 3
-
-# bin / out of sight
 bindsym $mod+semicolon      workspace 4
+bindsym $mod+1              workspace 5
+bindsym $mod+2              workspace 6
+bindsym $mod+3              workspace 7
+bindsym $mod+4              workspace 8
+bindsym $mod+5              workspace 9
+bindsym $mod+6              workspace 10
+bindsym $mod+7              workspace 11
+bindsym $mod+8              workspace 12
+bindsym $mod+9              workspace 13
+bindsym $mod+0              workspace 14
+
+bindsym $mod+Shift+u        move container to workspace 1
+bindsym $mod+Shift+i        move container to workspace 2
+bindsym $mod+Shift+o        move container to workspace 3
 bindsym $mod+Shift+semicolon move container to workspace 4
+bindsym $mod+Shift+1        move container to workspace 5
+bindsym $mod+Shift+2        move container to workspace 6
+bindsym $mod+Shift+3        move container to workspace 7
+bindsym $mod+Shift+4        move container to workspace 8
+bindsym $mod+Shift+5        move container to workspace 9
+bindsym $mod+Shift+6        move container to workspace 10
+bindsym $mod+Shift+7        move container to workspace 11
+bindsym $mod+Shift+8        move container to workspace 12
+bindsym $mod+Shift+9        move container to workspace 13
+bindsym $mod+Shift+0        move container to workspace 14
 
 # back and forth
 bindsym $mod+space          workspace back_and_forth

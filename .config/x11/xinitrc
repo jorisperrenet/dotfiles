@@ -2,16 +2,19 @@
 
 # xinitrc runs automatically when you run startx.
 
+# Source the profile.
 if [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/shell/profile" ]; then
 	source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/profile"
 else
 	source "$HOME/.zprofile"
 fi
 
+# Execute commands before the window manager is started.
 if [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/x11/xprofile" ]; then
 	. "${XDG_CONFIG_HOME:-$HOME/.config}/x11/xprofile"
 else
 	. "$HOME/.xprofile"
 fi
 
+# Start the window manager
 exec i3

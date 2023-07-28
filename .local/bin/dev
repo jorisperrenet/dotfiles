@@ -1,0 +1,3 @@
+#!/bin/zsh
+
+alacritty --working-directory "$HOME/prog" -e $SHELL -c 'source venv/bin/activate && $SHELL'
