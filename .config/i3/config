@@ -42,6 +42,8 @@ bindsym $mod+n           exec nautilus -w
 bindsym $mod+z           exec zathura
 
 bindsym $mod+d           exec dmenu_path | dmenu
+bindsym $mod+x           exec $(echo "i3lock|shutdown now|reboot|i3-msg exit" | tr "|" "\n" | dmenu)
+
 # # volume control (primarily for laptop)
 # bindsym $mod+plus        exec "pulsemixer --change-volume +3"
 # bindsym $mod+minus       exec "pulsemixer --change-volume -3"

@@ -11,7 +11,7 @@ export PATH="/usr/sbin:$PATH";
 export PATH="$HOME/.local/bin:$PATH";
 
 # Default programs
-export BROWSER="qutebrowser"
+export BROWSER="brave"
 export EDITOR="nvim"
 export TERMINAL="alacritty"
 
@@ -51,25 +51,4 @@ export PSQL_HISTORY="$XDG_CACHE_HOME/pg/psql_history"
 ! pidof -s Xorg >/dev/null 2>&1 && exec startx "$XINITRC"
 
 # Load the aliases.
-### Set some environment variables
-# Main monitor for polybar
-monitor="$(xrandr | grep -w -m1 connected | awk '{print $1}')"
-export MONITOR_MAIN="$monitor"
-
-# Interface for network, for polybar
-inter="$(iwgetid | awk '{print $1}')"
-export INTERFACE=$inter
-
-# Battery and adapter
-if [ -z "$(ls /sys/class/power_supply | grep BAT)" ]; then
-    export ON_LAPTOP=false
-else
-    export ON_LAPTOP=true
-fi
-
-bat="$(ls /sys/class/power_supply | grep BAT | head -n1)"
-adap="$(ls /sys/class/power_supply | grep AD | head -n1)"
-export BATTERY=$bat
-export ADAPTER=$adap
-
-export $(dbus-launch)
+source "$XDG_CONFIG_HOME/shell/aliasrc"
