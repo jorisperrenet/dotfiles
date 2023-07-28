@@ -78,7 +78,7 @@ set whichwrap=b,h,l,s,<,>,[,],~
 set breakindent   " Visually keep indentation level of wrapped lines
 set showbreak=↳   " Indicate a line is wrapped by adding this char in front
 set linebreak     " Hard break at characters in 'breakat'
-set textwidth=100 " Hard break long lines
+set textwidth=-1 " Hard break long lines
 
 set splitbelow  " :split adds window below and follows it
 set splitright  " :vsplit adds window to the right and follows it
