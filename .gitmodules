@@ -88,3 +88,12 @@
 [submodule ".config/nvim/pack/bundle/opt/vimtex"]
 	path = .config/nvim/pack/bundle/opt/vimtex
 	url = https://github.com/lervag/vimtex
+[submodule ".config/nvim/pack/bundle/opt/html5.vim"]
+	path = .config/nvim/pack/bundle/opt/html5.vim
+	url = https://github.com/othree/html5.vim
+[submodule ".config/nvim/pack/bundle/opt/vim-javascript"]
+	path = .config/nvim/pack/bundle/opt/vim-javascript
+	url = https://github.com/pangloss/vim-javascript
+[submodule ".config/nvim/pack/bundle/opt/vim-svelte"]
+	path = .config/nvim/pack/bundle/opt/vim-svelte
+	url = https://github.com/evanleck/vim-svelte

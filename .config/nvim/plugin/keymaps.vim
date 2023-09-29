@@ -1,7 +1,9 @@
 " Fast executing
 nmap <leader>t <C-W>picargo build; time cargo run<cr><C-W>p
 nmap <leader>b <C-W>pitime python "#pi<cr><C-W>p
-nmap <leader>a <C-W>pir<cr><C-W>p
+nmap <leader>e <C-W>picf test<cr><C-W>p
+nmap <leader>c <C-W>pi<C-W>p
+nmap <leader>a :w!<cr><C-W>pir<cr><C-W>p
 nmap <leader>sh :split term://zsh<cr><C-W>p
 nmap <leader>sv :vsplit term://zsh<cr><C-W>p
 nmap <leader>p <C-W>p
@@ -12,9 +14,9 @@ tmap <Del> <C-W>p
 nmap <leader>w :w!<cr>
 nmap <leader>q :q!<cr>
 " Super useful when editing files in the same directory
-map <leader>e :e <c-r>=expand("%:p:h")<cr>/
+" map <leader>e :e <c-r>=expand("%:p:h")<cr>/
 " Switch CWD to the directory of the open buffer
-map <leader>cd :cd %:p:h<cr>:pwd<cr>
+" map <leader>cd :cd %:p:h<cr>:pwd<cr>
 " Reload vim config by reloading all matched patterns when
 " searching `runtimepath` and `packpath`
 nnoremap <leader>r :runtime! init.vim plugin/** after/plugin/** after/ftplugin/**<cr>
@@ -47,7 +49,7 @@ map <leader>z :e ~/.local/share/vimwiki/docs/index.md<cr>
 map <leader>zs :call system("mkdocs serve -f ~/.local/share/vimwiki/mkdocs.yml &")<cr>
 
 " Close the current buffer but maintain window layout
-map <leader>bc :Bclose<cr>
+" map <leader>bc :Bclose<cr>
 
 " Cycle through buffers
 map <leader>l :bnext<cr>
@@ -82,11 +84,11 @@ map <leader>sf z=
 map <leader>v :setlocal paste!<cr>
 
 " Copy file content to clipboard
-if has("mac") || has("macunix")
-    nmap <silent> <leader>cf :! pbcopy < %<CR>
-elseif has("unix")
-    nmap <silent> <leader>cf :! cat % \| xclip -selection c<CR>
-endif
+" if has("mac") || has("macunix")
+"     nmap <silent> <leader>cf :! pbcopy < %<CR>
+" elseif has("unix")
+"     nmap <silent> <leader>cf :! cat % \| xclip -selection c<CR>
+" endif
 
 " Use Esc in terminal to enter normal mode. This does interfere
 " with the vi-mode from zsh, but this does not matter as it has
