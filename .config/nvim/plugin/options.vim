@@ -151,4 +151,10 @@ let g:vimtex_view_method = 'zathura'
 " see ":help vimtex-compiler".
 
 let g:vimtex_compiler_method = 'latexmk'
-" let g:vimtex_compiler_method = 'xelatex'
+let g:vimtex_compiler_latexmk_engines = {
+\   '_' : '-xelatex',
+\}
+let g:vimtex_compiler_latexmk = {
+\   'aux_dir' : '../build_latex',
+\   'out_dir' : '../build_latex',
+\}

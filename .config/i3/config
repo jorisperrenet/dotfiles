@@ -37,6 +37,7 @@ set $term alacritty
 bindsym $mod+Return      exec $term
 bindsym $mod+Shift+Return exec dev
 bindsym $mod+Ctrl+Shift+Return exec dev_comp
+bindsym $mod+p           exec passwords
 bindsym $mod+b           exec brave
 bindsym $mod+Shift+m     exec $term -e htop
 bindsym $mod+n           exec nautilus -w

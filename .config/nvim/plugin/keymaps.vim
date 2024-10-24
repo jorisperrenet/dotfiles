@@ -1,6 +1,7 @@
 " Fast executing
 nmap <leader>t <C-W>picargo build; time cargo run<cr><C-W>p
 nmap <leader>b <C-W>pitime python "#pi<cr><C-W>p
+nmap <leader>s <C-W>picat "#pi > "#pi<BS><BS>sage; time sage "#pi<BS><BS>sage<cr><C-W>p
 nmap <leader>e <C-W>picf test<cr><C-W>p
 nmap <leader>c <C-W>pi<C-W>p
 nmap <leader>a :w!<cr><C-W>pir<cr><C-W>p
