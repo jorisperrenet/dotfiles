@@ -1,11 +1,5 @@
 local builtin = require('telescope.builtin')
 
-function find_files(opts)
-  return function()
-               builtin.find_files(opts)
-         end
-end
-
 function find_dotfiles()
     builtin.find_files {
         prompt_title = "~ dotfiles ~",
@@ -24,6 +18,7 @@ function git_files()
             -- you add a new file which you haven't `git add` yet.
             "-o",
             "--exclude-standard",
+            "--deduplicate",
         }
     }
 end
@@ -38,7 +33,7 @@ end
 function live_grep_zettelkasten()
     builtin.live_grep {
         prompt_title = "~ Live Grep Zettelkasten ~",
-        cwd = "$XDG_DATA_HOME/vimwiki",
+        cwd = "~/protondrive/vimwiki",
     }
 end
 
@@ -49,7 +44,7 @@ function live_grep()
 end
 
 -- Files/Search related
-vim.keymap.set('n', '<C-f>', find_files({hidden=true}), {desc="[F]ind"})
+vim.keymap.set('n', '<C-f>', builtin.find_files, {desc="[F]ind"})
 vim.keymap.set('n', '<leader>ff', git_files, {desc="[F]ind git [F]iles"})
 vim.keymap.set('n', '<leader>fd', find_dotfiles, {desc="[F]ind [D]otfiles"})
 vim.keymap.set('n', '<leader>fo', builtin.oldfiles, {desc="[F]ind [O]ldfiles"})
@@ -65,6 +60,7 @@ vim.keymap.set('n', '<leader>/', builtin.current_buffer_fuzzy_find, {desc="[/] S
 -- LSP related
 vim.keymap.set('n', '<leader>fs', builtin.lsp_document_symbols, {desc="[F]ind [S]ymbols"})
 
+local actions = require('telescope.actions')
 require('telescope').setup{
   defaults = {
     -- Default configuration for telescope goes here:
@@ -85,6 +81,7 @@ require('telescope').setup{
         -- using a string, e.g. `telescope.actions.move_selection_next`
         ["<C-k>"] = "move_selection_previous",
         ["<C-j>"] = "move_selection_next",
+        ["<C-o>"] = function(p_bufnr) actions.send_selected_to_qflist(p_bufnr) vim.cmd.cfdo("edit") end,
         -- TODO: I could make this "cycle through options" like with
         -- ctrlp
         -- ["<C-f>"] = find_files({}),
@@ -99,6 +96,11 @@ require('telescope').setup{
     -- }
     -- Now the picker_config_key will be applied every time you call this
     -- builtin picker
+    find_files = {
+      find_command = {
+          "fdfind", "--type", "f", "--strip-cwd-prefix", "--hidden", "--exclude", "**/.git/*"
+      },
+    },
   },
   extensions = {
     -- Your extension configuration goes here:

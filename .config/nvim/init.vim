@@ -71,57 +71,49 @@ let g:loaded_2html_plugin = 1
 
 " No default key mappings to prevent it overwriting other mappings.
 let g:comfortable_motion_no_default_key_mappings = 1
-let g:EasyMotion_do_mapping = 0
+let g:comfortable_motion_friction = 100
+let g:comfortable_motion_air_drag = 8.0
 
 " Third-party plugins
+packadd! vimtex
+packadd! sonokai
 " If the help doc tags can't be found, e.g. `:h ctrlp` then you need to
 " run the command `:helptags ALL`
-" packadd! LuaSnip
-" packadd! cmp_luasnip
-packadd! vimtex
-packadd! lspconfig
 packadd! lightline.vim
 packadd! rust.vim
+" gcu to uncomment all following lines
+" gcc to toggle: comment <--> uncomment
 packadd! vim-commentary
-packadd! vim-easymotion
+" Use `ii` to select within same indentation level.
 packadd! vim-indent-object
-
+" Jump to text locations within your open windows
+packadd! flash.nvim
+" Dependencies of other thrid-party plugins
+packadd! plenary.nvim  " Telescope
 " Telescope fuzzy finder
-packadd! plenary.nvim  " Dependency of telescope
 packadd! telescope.nvim
 packadd! telescope-fzf-native.nvim
-
-" TODO: nvim-treesitter
+" Treesitter
 packadd! nvim-treesitter
 packadd! nvim-treesitter-textobjects
 packadd! playground
-
 " Easy text alignment (e.g. for tables in markdown)
 packadd! tabular
-" Distraction-free writing
-packadd! goyo.vim
 " Smooth scrolling with `<C-d>` and `<C-u>`
 packadd! comfortable-motion.vim
 " Colorschemes
 packadd! peaksea
-packadd! sonokai
-
 " --- LSP config
 " Collection of (quickstart) LSP configs. This way you can easily add new
 " language servers. It is a convenience layer, NOT a requirement.
 " `:h lspconfig`
 packadd! nvim-lspconfig
-" Add `nvim-cmp` capabilities to the built-in Nvim LSP client
-" capabilities. This way the language server provides better completion
-" results as the client (which is Nvim) has more capabilities.
-" Basically, on each request to the language server it now adds
-" additional capabilities.
-packadd! cmp-nvim-lsp
-" Autocompletion, see `:help nvim-cmp`
-" Nvim does not support built-in autocompletion so a plugin is needed.
-packadd! nvim-cmp
-" Display function signature while entering parameters
-packadd! cmp-nvim-lsp-signature-help
+" All-in-one LSP package:
+" - Completion
+" - capabilities
+" - signature help
+" packadd! blink.cmp
+packadd! vim-svelte
 
 lua << EOF
 require("yannick.globals")
