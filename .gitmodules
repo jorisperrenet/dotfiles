@@ -97,3 +97,9 @@
 [submodule ".config/nvim/pack/bundle/opt/vim-svelte"]
 	path = .config/nvim/pack/bundle/opt/vim-svelte
 	url = https://github.com/evanleck/vim-svelte
+[submodule ".config/nvim/pack/bundle/opt/blink.cmp"]
+	path = .config/nvim/pack/bundle/opt/blink.cmp
+	url = https://github.com/saghen/blink.cmp
+[submodule ".config/nvim/pack/bundle/opt/flash.nvim"]
+	path = .config/nvim/pack/bundle/opt/flash.nvim
+	url = https://github.com/folke/flash.nvim
